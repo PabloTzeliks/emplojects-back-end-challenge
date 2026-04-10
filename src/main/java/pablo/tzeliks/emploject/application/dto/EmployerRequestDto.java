@@ -6,10 +6,10 @@ import jakarta.validation.constraints.NotBlank;
 public record EmployerRequestDto(
 
         @JsonProperty(value = "name")
-        @NotBlank
+        @NotBlank(message = "Phone Number cannot be blank")
         String name,
 
         @JsonProperty(value = "phone_number")
-        @NotBlank
+        @NotBlank(message = "Phone Number cannot be blank")
         String phoneNumber
 ) { }
