@@ -1,12 +1,12 @@
 package pablo.tzeliks.emploject.application.service;
 
 import org.springframework.stereotype.Service;
-import pablo.tzeliks.emploject.application.dto.EmployerRequestDto;
+import pablo.tzeliks.emploject.application.dto.CreateEmployerRequestDto;
 import pablo.tzeliks.emploject.application.dto.EmployerResponseDto;
+import pablo.tzeliks.emploject.application.dto.UpdateEmployerRequestDto;
 import pablo.tzeliks.emploject.application.mapper.EmployerMapper;
 import pablo.tzeliks.emploject.domain.exception.InvalidPhoneNumberException;
 import pablo.tzeliks.emploject.domain.exception.ResourceNotFoundException;
-import pablo.tzeliks.emploject.domain.model.Employer;
 import pablo.tzeliks.emploject.infrastructure.persistency.EmployerJpaRepository;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class EmployerService {
         this.mapper = mapper;
     }
 
-    public EmployerResponseDto save(EmployerRequestDto requestDto) {
+    public EmployerResponseDto save(CreateEmployerRequestDto requestDto) {
 
         if (requestDto.phoneNumber().length() != 11) {
             throw new InvalidPhoneNumberException("Invalid phone number, must be 11 digits");
@@ -46,16 +46,38 @@ public class EmployerService {
         return mapper.toDto(savedEmployer.get());
     }
 
-    public List<Employer> findAll() {
+    public List<EmployerResponseDto> findAll() {
 
-        return null;
+        var savedEmployers = employerRepository.findAll();
+
+        if (savedEmployers.isEmpty()) {
+            throw new ResourceNotFoundException("There are no employers");
+        }
+
+        return savedEmployers.stream()
+                .map(mapper::toDto)
+                .toList();
     }
 
     public void delete(Long id) {
+
+        if (!employerRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Employee with id " + id + " not found");
+        }
+
+        employerRepository.deleteById(id);
     }
 
-    public Employer update(Employer employer) {
+    public EmployerResponseDto update(UpdateEmployerRequestDto requestDto) {
 
-        return null;
+        if (!employerRepository.existsById(requestDto.id())) {
+            throw new ResourceNotFoundException("Employee with id " + requestDto.id() + " not found");
+        }
+
+        var employer = mapper.toEntity(requestDto);
+
+        var updatedEmployer = employerRepository.save(employer);
+
+        return mapper.toDto(updatedEmployer);
     }
 }

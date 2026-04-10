@@ -25,6 +25,12 @@ public class Employer {
         this.phoneNumber = phoneNumber;
     }
 
+    public Employer(Long id, String nome, String phoneNumber) {
+        this.id = id;
+        this.nome = nome;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Employer() { }
 
     public Long getId() {
