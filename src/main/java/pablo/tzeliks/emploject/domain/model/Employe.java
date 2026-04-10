@@ -18,7 +18,7 @@ public class Employe {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Project> projects = new ArrayList<Project>();
 
     public Employe(String nome, String phoneNumber, List<Project> projects) {
