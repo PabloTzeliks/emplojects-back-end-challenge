@@ -2,12 +2,11 @@ package pablo.tzeliks.emploject.domain.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "employe")
-public class Employe {
+public class Employer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,14 +18,14 @@ public class Employe {
     private String phoneNumber;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Project> projects = new ArrayList<Project>();
+    private List<Project> projects;
 
-    public Employe(String nome, String phoneNumber, List<Project> projects) {
+    public Employer(String nome, String phoneNumber, List<Project> projects) {
         this.nome = nome;
         this.phoneNumber = phoneNumber;
     }
 
-    public Employe() { }
+    public Employer() { }
 
     public Long getId() {
         return id;

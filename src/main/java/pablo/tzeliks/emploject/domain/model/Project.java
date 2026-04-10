@@ -17,7 +17,7 @@ public class Project {
     private String description;
 
     @ManyToMany(mappedBy = "employe")
-    private List<Employe> employees;
+    private List<Employer> employees;
 
     public Project(String nome, String description) {
         this.nome = nome;
@@ -50,11 +50,11 @@ public class Project {
         this.description = description;
     }
 
-    public List<Employe> getEmployees() {
+    public List<Employer> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(List<Employe> employees) {
+    public void setEmployees(List<Employer> employees) {
         this.employees = employees;
     }
 }
