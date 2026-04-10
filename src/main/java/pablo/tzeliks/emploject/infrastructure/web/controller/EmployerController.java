@@ -39,7 +39,15 @@ public class EmployerController {
         return ResponseEntity.status(HttpStatus.OK).body(employerService.findAll());
     }
 
-    @PatchMapping
+    @DeleteMapping("/{id}")
+    public ResponseEntity<EmployerResponseDto> deleteEmployer(@PathVariable Long id) {
+
+        employerService.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping
     public ResponseEntity<EmployerResponseDto> updateEmployer(@Valid @RequestBody UpdateEmployerRequestDto requestDto) {
 
         return ResponseEntity.status(HttpStatus.OK).body(employerService.update(requestDto));
