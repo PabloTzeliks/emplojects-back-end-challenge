@@ -3,7 +3,7 @@ package pablo.tzeliks.emploject.application.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 
-public record EmployerRequestDto(
+public record CreateEmployerRequestDto(
 
         @JsonProperty(value = "name")
         @NotBlank(message = "Phone Number cannot be blank")
