@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pablo.tzeliks.emploject.domain.exception.InvalidPhoneNumberException;
+import pablo.tzeliks.emploject.domain.exception.ResourceNotFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -20,12 +21,21 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ProblemDetail handleResourceNotFoundException(ResourceNotFoundException ex) {
+        return ProblemDetail.forStatusAndDetail(
+                HttpStatus.NOT_FOUND,
+                ex.getMessage()
+        );
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_CONTENT)
     public ProblemDetail handleJsonParametersException(MethodArgumentNotValidException ex) {
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.UNPROCESSABLE_CONTENT,
-                ex.getMessage()
+                "Malformatted Fields on JSON request"
         );
     }
 }

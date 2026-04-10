@@ -5,6 +5,7 @@ import pablo.tzeliks.emploject.application.dto.EmployerRequestDto;
 import pablo.tzeliks.emploject.application.dto.EmployerResponseDto;
 import pablo.tzeliks.emploject.application.mapper.EmployerMapper;
 import pablo.tzeliks.emploject.domain.exception.InvalidPhoneNumberException;
+import pablo.tzeliks.emploject.domain.exception.ResourceNotFoundException;
 import pablo.tzeliks.emploject.domain.model.Employer;
 import pablo.tzeliks.emploject.infrastructure.persistency.EmployerJpaRepository;
 
@@ -34,9 +35,15 @@ public class EmployerService {
         return mapper.toDto(savedEmployer);
     }
 
-    public Employer findById(Long id) {
+    public EmployerResponseDto findById(Long id) {
 
-        return null;
+        var savedEmployer = employerRepository.findById(id);
+
+        if (savedEmployer.isEmpty()) {
+            throw new ResourceNotFoundException("Employee with id " + id + " not found");
+        }
+
+        return mapper.toDto(savedEmployer.get());
     }
 
     public List<Employer> findAll() {
