@@ -18,4 +18,43 @@ public class Project {
 
     @ManyToMany(mappedBy = "employe")
     private List<Employe> employees;
+
+    public Project(String nome, String description) {
+        this.nome = nome;
+        this.description = description;
+    }
+
+    public Project() { }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Employe> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employe> employees) {
+        this.employees = employees;
+    }
 }

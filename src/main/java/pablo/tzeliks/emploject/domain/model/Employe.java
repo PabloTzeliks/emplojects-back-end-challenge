@@ -26,6 +26,8 @@ public class Employe {
         this.phoneNumber = phoneNumber;
     }
 
+    public Employe() { }
+
     public Long getId() {
         return id;
     }
