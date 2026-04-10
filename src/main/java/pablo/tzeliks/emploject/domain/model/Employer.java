@@ -20,7 +20,7 @@ public class Employer {
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Project> projects;
 
-    public Employer(String nome, String phoneNumber, List<Project> projects) {
+    public Employer(String nome, String phoneNumber) {
         this.nome = nome;
         this.phoneNumber = phoneNumber;
     }
