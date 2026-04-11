@@ -31,8 +31,7 @@ public class EmployerMapper {
         return new EmployerResponseDto(
                 entity.getId(),
                 entity.getNome(),
-                entity.getPhoneNumber(),
-                entity.getProjects()
+                entity.getPhoneNumber()
         );
     }
 }
