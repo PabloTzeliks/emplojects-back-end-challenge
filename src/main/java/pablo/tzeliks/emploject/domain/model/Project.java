@@ -24,6 +24,12 @@ public class Project {
         this.description = description;
     }
 
+    public Project(Long id, String nome, String description) {
+        this.id = id;
+        this.nome = nome;
+        this.description = description;
+    }
+
     public Project() { }
 
     public Long getId() {
