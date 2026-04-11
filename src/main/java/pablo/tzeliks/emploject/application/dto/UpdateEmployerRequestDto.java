@@ -11,7 +11,7 @@ public record UpdateEmployerRequestDto(
         Long id,
 
         @JsonProperty(value = "name")
-        @NotBlank(message = "Phone Number cannot be blank")
+        @NotBlank(message = "Name cannot be blank")
         String name,
 
         @JsonProperty(value = "phone_number")

@@ -2,16 +2,14 @@ package pablo.tzeliks.emploject.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
+public record ProjectResponseDto(
 
-public record EmployerResponseDto(
-
-        @JsonProperty(value = "id")
+        @JsonProperty(value = "name")
         Long id,
 
         @JsonProperty(value = "name")
         String name,
 
-        @JsonProperty(value = "phone_number")
-        String phoneNumber
+        @JsonProperty(value = "description")
+        String description
 ) { }
